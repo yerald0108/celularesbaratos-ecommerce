@@ -24,7 +24,7 @@ export const Newsletter = () => {
                             placeholder="Correo Electrónico"
                         />
 
-                    <button className="bg-black text-white font-semibold rounded-full uppercase tracking-wider py-3 text-xs xl:px-5">
+                    <button className="bg-gray-950 hover:bg-gray-900 text-white font-semibold rounded-full uppercase tracking-wider py-3 text-xs xl:px-5">
                         Suscribirme
                     </button>
                     </form>

@@ -1,6 +1,6 @@
 # React + TypeScript + Vite
 
-## Codigos fuentes
+## Codigos fuentes:
 
 (Primera etapa)
 

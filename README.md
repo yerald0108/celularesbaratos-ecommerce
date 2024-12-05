@@ -11,3 +11,5 @@ npx tailwindcss init -p
 npm i react-router-dom
 
 npm install react-icons --save
+
+npm install @tiptap/react @tiptap/pm @tiptap/starter-kit

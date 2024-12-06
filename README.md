@@ -1,5 +1,16 @@
 # React + TypeScript + Vite
 
+Ecommerce de celulares desarrollado con React
+
+## Herramientas utilizadas:
+
+- React
+- Supabase
+- Tanstack Query
+- Zustand
+- React Hook From
+- Zod
+
 ## Codigos fuentes:
 
 (Primera etapa)

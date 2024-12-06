@@ -9,9 +9,6 @@ export const HomePage = () => {
     const preparedRecentProducts = prepareProducts(recentCelulares);
     const preparedPopularProducts = prepareProducts(popularCelulares)
 
-    console.log(preparedRecentProducts);
-    
-
     return (
         <div>
             <FeatureGrid />

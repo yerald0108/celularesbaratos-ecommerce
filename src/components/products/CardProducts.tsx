@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { VariantProducts } from "../../interfaces";
+import { formatPrice } from "../../helpers";
 
 interface Props {
     img: string;
@@ -55,7 +56,7 @@ export const CardProducts = ({
 
             <div className="flex flex-col gap-1 items-center">
                 <p className="text-[15px] font-medium">{name}</p>
-                <p className="text-[15px] font-medium">{price}</p>
+                <p className="text-[15px] font-medium">{formatPrice(price)}</p>
 
                 <div className="flex gap-3">
                     {colors.map(color => (

@@ -26,3 +26,7 @@ npm i react-router-dom
 npm install react-icons --save
 
 npm install @tiptap/react @tiptap/pm @tiptap/starter-kit
+
+npm install @supabase/supabase-js
+
+npm i @tanstack/react-query

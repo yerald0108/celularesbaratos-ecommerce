@@ -1,11 +1,27 @@
+import { useState } from "react";
 import { CardProducts } from "../components/products/CardProducts";
 import { ContainerFilter } from "../components/products/ContainerFilter";
-import { allCelulares } from "../data/initialData";
 import { prepareProducts } from "../helpers";
+import { useFilteredProducts } from "../hooks";
+import { Pagination } from "../components/shared/Pagination";
 
 export const CellPhonesPage = () => {
 
-    const preparedProducts = prepareProducts(allCelulares);
+    const [page, setPage] = useState(1);
+    const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+
+    const { 
+        data: products = [], 
+        isLoading, 
+        totalProducts, 
+    } = useFilteredProducts({
+        page,
+        brands: selectedBrands,
+    });
+
+    if (isLoading || !products) return <p>Cargando...</p>;
+
+    const preparedProducts = prepareProducts(products);
 
     return (
 
@@ -17,7 +33,17 @@ export const CellPhonesPage = () => {
             
 
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            <ContainerFilter />
+
+            <ContainerFilter 
+                setSelectedBrands={setSelectedBrands}
+                selectedBrands={selectedBrands}
+            />
+
+            {isLoading ? (
+                <div className="col-span-2 flex items-center justify-center h-[500px]">
+                    <p className="text-2xl">Cargando...</p>
+                </div>
+            ) : (
 
                 <div className="col-span-2 lg:col-span-2 xl:col-span-4 flex flex-col gap-12">
                     <div className="grid grid-cols-2 gap-3 gap-y-10 xl:grid-cols-4">
@@ -34,7 +60,13 @@ export const CellPhonesPage = () => {
                         ))}
                     </div>
 
+                    <Pagination 
+                        totalItems={totalProducts}
+                        page={page}
+                        setPage={setPage}
+                    />
                 </div>
+                )}
             </div>
         </>
     );

@@ -13,20 +13,20 @@ Ecommerce de celulares desarrollado con React
 
 ## Codigos fuentes:
 
-(Primera etapa)
+- npm install
 
-npm install
+- npm install -D tailwindcss postcss autoprefixer
 
-npm install -D tailwindcss postcss autoprefixer
+- npx tailwindcss init -p
 
-npx tailwindcss init -p
+- npm i react-router-dom
 
-npm i react-router-dom
+- npm install react-icons --save
 
-npm install react-icons --save
+- npm install @tiptap/react @tiptap/pm @tiptap/starter-kit
 
-npm install @tiptap/react @tiptap/pm @tiptap/starter-kit
+- npm install @supabase/supabase-js
 
-npm install @supabase/supabase-js
+- npm i @tanstack/react-query
 
-npm i @tanstack/react-query
+- npm install -D @tailwindcss/typography

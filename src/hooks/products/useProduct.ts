@@ -1,8 +1,8 @@
-import { useQuery } from "@tanstack/react-query"
-import { getProductBySlug } from "../../actions"
+import { useQuery } from "@tanstack/react-query";
+import { getProductBySlug } from "../../actions";
 
 
-export const useProducts = (slug: string) => {
+export const useProduct = (slug: string) => {
     const {
         data: product,
         isLoading,

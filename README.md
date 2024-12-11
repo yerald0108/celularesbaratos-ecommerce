@@ -30,3 +30,5 @@ Ecommerce de celulares desarrollado con React
 - npm i @tanstack/react-query
 
 - npm install -D @tailwindcss/typography
+
+- npm install zustand

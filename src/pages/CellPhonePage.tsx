@@ -2,7 +2,7 @@ import { LuMinus, LuPlus } from "react-icons/lu";
 import { Separator } from "../components/shared/Separator";
 import { formatPrice } from "../helpers";
 import { CiDeliveryTruck } from "react-icons/ci";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { BsChatLeftText } from "react-icons/bs";
 import { ProductDescription } from "../components/one-product/ProductDescription";
 import { GridImages } from "../components/one-product/GridImages";
@@ -12,6 +12,8 @@ import { VariantProducts } from "../interfaces";
 import { Tag } from "../components/shared/Tag";
 import { Loader } from "../components/shared/Loader";
 import { useCounterStore } from "../store/counter.store";
+import { useCartStore } from "../store/cart.store";
+import toast from "react-hot-toast";
 
 interface Acc {
     [key: string]: {
@@ -24,7 +26,9 @@ export const CellPhonePage = () => {
 
     const { slug } = useParams<{slug: string}>();
 
-    const { product, isLoading, isError } = useProduct(slug || '');
+    const [currentSlug, setCurrentSlug] = useState(slug)
+
+    const { product, isLoading, isError } = useProduct(currentSlug || '');
 
     const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
@@ -34,7 +38,10 @@ export const CellPhonePage = () => {
 
     const count = useCounterStore(state => state.count);
     const increment = useCounterStore(state => state.increment);
-    const decrement = useCounterStore(state => state.decrement);    
+    const decrement = useCounterStore(state => state.decrement);
+    
+    const addItem = useCartStore(state => state.addItem);
+    const navigate = useNavigate();
 
     const colors = useMemo(() => {
         return product?.variants.reduce(
@@ -84,6 +91,48 @@ export const CellPhonePage = () => {
     }, [selectedColor, selectedStorage, product?.variants])
 
     const isOutOfStock = selectedVariant?.stock === 0;
+
+    const addToCart = () => {
+        if(selectedVariant) {
+            addItem({
+                variantId: selectedVariant.id,
+                productId: product?.id || '',
+                name: product?.name || '',
+                image: product?.images[0] || '',
+                color: selectedVariant.color_name,
+                storage: selectedVariant.storage,
+                price: selectedVariant.price,
+                quantity: count,
+            });
+            toast.success('Producto añadido al carrito', {
+                position: 'bottom-right',
+            });
+        }
+    };
+
+    const buyNow = () => {
+        if(selectedVariant) {
+            addItem({
+                variantId: selectedVariant.id,
+                productId: product?.id || '',
+                name: product?.name || '',
+                image: product?.images[0] || '',
+                color: selectedVariant.color_name,
+                storage: selectedVariant.storage,
+                price: selectedVariant.price,
+                quantity: count,
+            });
+            navigate('checkout');
+        }
+    };
+
+    useEffect (() => {
+        setCurrentSlug(slug);
+
+        setSelectedColor(null);
+        setSelectedStorage(null);
+        setSelectedVariant(null);
+    }, [slug]);
 
     if (isLoading) return <Loader />;
 
@@ -204,11 +253,13 @@ export const CellPhonePage = () => {
 
                                 <div className="flex flex-col gap-3">
                                     <button className="bg-[#f3f3f3] uppercase font-semibold tracking-widest text-xs py-4 rounded-full transition-all
-                                    duration-300 hover:bg-[#e2e2e2] w-full">
+                                    duration-300 hover:bg-[#e2e2e2] w-full" onClick={addToCart}>
                                         Agregar al carro
                                     </button>
                                     <button
-                                        className="bg-black text-white uppercase font-semibold tracking-widest text-xs py-4 rounded-full">
+                                        className="bg-black text-white uppercase font-semibold tracking-widest text-xs py-4 rounded-full"
+                                        onClick={buyNow}    
+                                    >
                                         Comprar ahora
                                     </button>
                                 </div>

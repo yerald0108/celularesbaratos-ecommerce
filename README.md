@@ -32,3 +32,5 @@ Ecommerce de celulares desarrollado con React
 - npm install -D @tailwindcss/typography
 
 - npm install zustand
+
+- npm install react-hot-toast

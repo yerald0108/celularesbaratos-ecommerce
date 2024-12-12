@@ -1,5 +1,5 @@
 import { create, StateCreator } from "zustand";
-import { devtools } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
 import { ICartItem } from "../components/shared/CartItem";
 
 export interface CartState {
@@ -11,7 +11,7 @@ export interface CartState {
     addItem: (item: ICartItem) => void;
     removeItem: (variantId: string) => void;
     updateQuantity: (variantId: string, quantity: number) => void;
-    cleanCart: () => void;
+    clearCart: () => void;
 }; 
 
 const storeApi: StateCreator<CartState> = set => ({
@@ -102,11 +102,15 @@ const storeApi: StateCreator<CartState> = set => ({
         })
     },
 
-    cleanCart: () => {
+    clearCart: () => {
         set({ items: [], totalItemsInCart: 0, totalAmount: 0 })
     },
 });
 
 export const useCartStore = create<CartState>()(
-    devtools(storeApi)
+    devtools(
+        persist(storeApi, {
+            name: 'cart-store',
+        })
+    )
 );

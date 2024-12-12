@@ -34,3 +34,9 @@ Ecommerce de celulares desarrollado con React
 - npm install zustand
 
 - npm install react-hot-toast
+
+- npm install @hookform/resolvers
+
+- npm install react-hook-form
+
+- npm install zod

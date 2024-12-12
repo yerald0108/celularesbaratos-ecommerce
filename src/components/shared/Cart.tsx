@@ -11,7 +11,7 @@ export const Cart = () => {
     const closeSheet = useGlobalStore(state => state.closeSheet);
 
     const cartItems = useCartStore(state => state.items);
-    const clearCart = useCartStore(state => state.cleanCart);
+    const clearCart = useCartStore(state => state.clearCart);
     const totalItemsCart = useCartStore(state => state.totalItemsInCart);
 
     return (
